@@ -1,0 +1,69 @@
+.json-markup {
+	line-height: 14px;
+	font-size: 10px;
+    font-family: 'Source Code Pro';
+	white-space: pre;
+}
+.json-markup-key {
+	font-weight: bold;
+    font-family: 'Source Code Pro';
+}
+.json-markup-bool {
+	color: #FFCF00
+    font-family: 'Source Code Pro';
+}
+.json-markup-string {
+	color: #f1727d;
+    font-family: 'Source Code Pro';
+}
+.json-markup-null {
+	color: gray;
+    font-family: 'Source Code Pro';
+}
+.json-markup-number {
+	color: #b3d173;
+    font-family: 'Source Code Pro';
+}
+.json-text{
+    color: #ff8913;
+    font-family: 'Source Code Pro';
+}
+
+.chatMsg{
+    color: #FFCF00;
+    font-family: 'Source Code Pro';
+    font-size:1.1em;
+}
+
+.consoleRow{
+    display:block;
+    clear: both;
+    font-family: 'Source Code Pro';
+} .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+        border-bottom-color: rgb(221, 221, 221);
+    border-bottom-color: transparent;
+    background-color: rgba(0, 0, 0, 0.03);
+
+}
+.table-dark {
+
+    color: black !important;
+    background-color: #212529;
+    background-color: rgba(0, 0, 0, 0.03) !important;
+
+}
+.nav-tabs > li > a {
+
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid;
+
+}

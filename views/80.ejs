@@ -1,0 +1,997 @@
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script src="/jquery.js"  type="text/javascript"></script>
+  <script src="/mustache.js"  type="text/javascript"></script>
+  <script src="/moment.js"  type="text/javascript"></script>
+  <script src="/piechart.js"  type="text/javascript"></script>
+  <script src="/chart.js"  type="text/javascript"></script>
+  <script src="/nxt_address_ex.js"  type="text/javascript"></script>
+  <script src="/index.js"  type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/json.css" />
+
+  <title><%= url %></title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body onload="getBlocks()">
+
+  <div class="d-flex toggled" id="wrapper" >
+
+    <!-- Sidebar -->
+
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="background-color: <%= navigationDesign %> !important;">
+  <a href="/"><img alt="" src="<%= logoURL %>" height="52px" style="padding-right: 15px;"> </a>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose Pool
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a style="border-left: 5px solid #0093ff;"class="dropdown-item" href="<%- url %>"><b> Pool Version C<%= ((1-distribution)*100).toFixed(0) %>-H<%= (distribution*100).toFixed(0) %> </b></a>
+
+          </div>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            			<li class="nav-item" style="display: <%= displayDiscordIcon %>"><a href="<%= discord %>"><i class="fa fa-discord" style="font-size: 32px; color: #505050; "></i></a></li>
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal3"><b>Pool Information </b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal2"><b>Miner Configuration</b></a>
+            </li>
+
+            <li class="nav-item">
+                              <a id="nextPay" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal"><b>  </b></a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container" style="container: 'body'">
+
+      <br>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 mt-2 mt-sm-2 text-white">
+          <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container4" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+
+<script>
+Highcharts.chart('container4', {
+  xAxis: {
+    reversed: false,
+    gridLineWidth: 1,
+    labels: {
+      formatter: function() {
+        return this.value;
+      }
+    },
+  },
+    yAxis: {
+        min: 60000,
+    },
+    title: {
+        text: 'Historic Network Difficulty'
+    },
+    legend: {
+      enabled: false
+    },
+    series: [ {
+        type: 'area',
+        name: 'Difficulty in Terabyte',
+        data:
+        [[<%= block %>, <%= networkDiff %>],
+        [<%= block2 %>, <%= networkDiff2 %>],
+        [<%= block3 %>, <%= networkDiff3 %>],
+        [<%= block4 %>, <%= networkDiff4 %>],
+        [<%= block5 %>, <%= networkDiff5 %>],
+        [<%= block6 %>, <%= networkDiff6 %>],
+        [<%= block7 %>, <%= networkDiff7 %>],
+        [<%= block8 %>, <%= networkDiff8 %>],
+        [<%= block9 %>, <%= networkDiff9 %>],
+        [<%= block10 %>, <%= networkDiff10 %>],
+        [<%= block11 %>, <%= networkDiff11 %>],
+        [<%= block12 %>, <%= networkDiff12 %>],
+        [<%= block13 %>, <%= networkDiff13 %>],
+        [<%= block14 %>, <%= networkDiff14 %>]],
+        marker: {
+            radius: 5
+        }
+    }]
+});
+</script>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 mt-2 mt-sm-2 text-black">
+          <script src="https://code.highcharts.com/highcharts.js"></script>
+          <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+          <div id="container3" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+<script>
+
+
+</script>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card" style="">
+
+          <div class="card-header">
+          <b>  Account Wallet </b>
+          </div>
+          <form action="/account" style="margin-bottom: 0px;" method="get">
+            <fieldset >
+              <div class="card-header">
+
+                <input name="id" style="margin-top: 10px; "type="text" id="disabledTextInput" class="form-control" placeholder="Enter Burst-XXXX-XXXX-XXXX-XXXX">
+                <br> <button type="submit" class="btn btn-primary">Check</button> </form>
+              </div>
+
+
+
+            </fieldset>
+            <div class="card-header">
+              <b> How to Start </b>
+            </div>
+            <ul style="margin-bottom: 0px;"class="list-group">
+          <li style="border-left: 0px; border-right: 0px;"class="list-group-item d-flex justify-content-between align-items-center">
+            Set Recipient on  <a target="_blank" style="text-align: left"href="//rewardassignment.html"> Reward Assignment Page </a> or <a target="_blank" style="text-align: left"href="http://127.0.0.1:8125/rewardassignment.html"> Local Machine </a>
+            <span class="badge badge-primary badge-pill">1</span>
+          </li>
+          <li style="border-left: 0px; border-right: 0px;"class="list-group-item d-flex justify-content-between align-items-center">
+            Set reward recipient to <code> <%= rewardAdd %> </code>
+            <span class="badge badge-primary badge-pill">2</span>
+          </li>
+          <li style="border-left: 0px; border-right: 0px;" class="list-group-item d-flex justify-content-between align-items-center">
+            Wait for 4 block
+            <span class="badge badge-primary badge-pill">3</span>
+          </li>
+          <small style="padding-left: 15px;background-color: #dc3545 !important;color: white;"> <b> Note: We recommend to set the reward locally </b> </small>
+        </ul>
+
+        </div> <br>
+        </div>
+        <div class="col">
+          <div class="card" style="border-bottom: 0px !important">
+            <div class="card-header">
+            <b>  Account Monitor </b>
+            </div>
+
+              <fieldset >
+                <div class="card-header" >
+
+                  <input name="id" style="margin-top: 10px; "type="text" id="monitor" class="form-control" placeholder="Enter Burst-XXXX-XXXX-XXXX-XXXX">
+                  <br> <button type="button" class="btn btn-primary" onclick="checkStat()" data-toggle="modal" data-target="#exampleModal4">Check</button>
+                </div>
+
+
+
+              </fieldset>
+
+
+    <br>
+
+
+        </div>
+        <div class="card" style="border-top: 0px !important;">
+        <div class="card-header">
+          <b> Start Mining </b>
+        </div>
+        <ul  style="margin-bottom: 0px;" class="list-group">
+      <li style="border-left: 0px; border-right: 0px;"class="list-group-item d-flex justify-content-between align-items-center">
+        Choose preferred <a style="padding: 0px;" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal2">Miner and Configuration</a>
+        <span class="badge badge-primary badge-pill">1</span>
+      </li>
+      <li style="border-left: 0px; border-right: 0px;"class="list-group-item d-flex justify-content-between align-items-center">
+        Go to miner folder copy and paste <code> mining.conf </code>
+        <span class="badge badge-primary badge-pill">2</span>
+        <li style="border-left: 0px; border-right: 0px;"class="list-group-item d-flex justify-content-between align-items-center">
+          Start mining and check that no errors appear
+          <span class="badge badge-primary badge-pill">3</span>
+        </li>
+      </li>
+      <small style="padding-left: 15px;background-color: #dc3545 !important;color: white;"> <b> Note: Make sure to edit the folder path from the plots location </b> </small>
+    </ul>
+  <br>
+
+
+      </div>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <table class="table table-striped">
+          <thead  class="table-dark">
+            <tr>
+              <th scope="col">Block Height</th>
+              <th scope="col">Network Difficulty</th>
+              <th scope="col">Block Time</th>
+              <th scope="col">Pool Capacity </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th id="CurrentBlockLabel" scope="row">-</th>
+              <td id="NetDiffLabel">-</td>
+              <td id="RoundElapseTimeLabel">-</td>
+              <td id="cap">-</td>
+            </tr>
+          </tbody>
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Best Deadline </th>
+              <th scope="col">Total Shares</th>
+              <th scope="col">Reward</th>
+              <th scope="col">Total Submitters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th id="BestDeadlineLabel" scope="row">-</th>
+              <td id="TotalShareLabel">-</td>
+              <td><%= totalReward %></td>
+              <td id="MinersLabel">-</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Historic Data</a></li>
+    <li><a data-toggle="tab" href="#menu1">Recent Payments</a></li>
+    <li><a data-toggle="tab" href="#menu2">Recent Blocks</a></li>
+    <li><a data-toggle="tab" href="#menu3">Block Explorer</a></li>
+        <li><a data-toggle="tab" href="#menu4">Block Explorer Extended</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+       <input class="form-control" id="myInput" type="text" placeholder="Search for Burst-Address..">
+      <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#shareList tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#Payout2 tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+      <table class="table table-striped" id="data_table">
+      <thead class="table-dark" >
+        <tr>
+          <th scope="col">Burst-Address</th>
+            <th scope="col">Burst-Name</th>
+          <th scope="col">Best Deadline</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Capacity</th>
+          <th scope="col">Balance</th>
+          <th scope="col">Version</th>
+        </tr>
+      </thead>
+
+      <tbody id="shareList">
+
+      </tbody>
+    </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <input class="form-control" id="myInput2" type="text" placeholder="Search for Burst-Address..">
+      <table class="table table-striped">
+        <thead class="table-dark" >
+          <tr>
+            <th scope="col">Action</th>
+              <th scope="col">Transaction Number</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Pool</th>
+            <th scope="col">Date</th>
+            <th scope="col">Recipient</th>
+          </tr>
+        </thead>
+<tbody style="font-size: 12px;" id="Payout2">
+  <%- trans %>
+</tbody>
+    </table>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <div id="container2"></div>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <table class="table tablesorter " id="myTable">
+                        <thead class="table-dark">
+                          <th>
+                            Block
+                          </th>
+                          <th>
+                            Date
+                          </th>
+                          <th>
+                            Generator
+                          </th>
+                          <th>
+                            Reward
+                          </th>
+                          <th>
+                            Transactions
+                          </th>
+                        </thead>
+                        <tbody>
+                              <%- html %>
+                        </tbody>
+                      </table>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <div id="containers"></div>
+    </div>
+  </div>
+
+<script>
+
+</script>
+
+<!--  <div class="col-12">
+    <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Burst-Numeric</th>
+        <th scope="col">Burst-Address</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody id="lastSentTx">
+    </tbody>
+  </table>
+</div>-->
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="css/vendor/jquery/jquery.min.js"></script>
+  <script src="css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+    $("#wrapper").toggleClass("toggled");
+  </script>
+
+</body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Footer -->
+	<section id="footer" style=" background: #494e62 !important; color: black !important;">
+		<div class="container">
+			<div class="row text-center text-xs-center text-sm-left text-md-left">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Network</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://explore.burst.cryptoguru.org/"><i class="fa fa-angle-double-right"></i>Block Explorer</a></li>
+						<li><a href="https://www.burst-coin.org/"><i class="fa fa-angle-double-right"></i>Burst-coin.org</a></li>
+						<li><a href="https://www.burst-coin.org/wp-content/uploads/2017/07/The-Burst-Dymaxion-1.00.pdf"><i class="fa fa-angle-double-right"></i>Whitepaper</a></li>
+						<li><a href="https://addons.mozilla.org/de/firefox/"><i class="fa fa-angle-double-right"></i>Firefox Extension</a></li>
+						<li><a href="https://github.com/burst-apps-team/Qbundle/releases"><i class="fa fa-angle-double-right"></i>Download Wallet</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Forum</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://www.reddit.com/r/burstcoin/"><i class="fa fa-angle-double-right"></i>Reddit.com</a></li>
+						<li><a href="https://www.burstforum.net/"><i class="fa fa-angle-double-right"></i>Burstforum.com</a></li>
+						<li><a href="https://forums.getburst.net/"><i class="fa fa-angle-double-right"></i>GetBurst.com</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Communication</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://discordapp.com/invite/RPhpjVv"><i class="fa fa-angle-double-right"></i>Discord</a></li>
+						<li><a href="https://t.me/burstcoin"><i class="fa fa-angle-double-right"></i>Telegram</a></li>
+						<li><a href="https://bitcointalk.org/index.php?topic=1541310"><i class="fa fa-angle-double-right"></i>Bitcointalk</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="https://discord.gg/cUJDhqq"><i class="fa fa-discord"></i></a></li>
+
+					</ul>
+				</div>
+				</hr>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+				 <p>	The  <u><a href="https://github.com/BurstNeon">Pool Software</a></u> is written by Burstneon and will be tested for public access </p>
+					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://github.com/BurstNeon" target="_blank">Burstneon</a></p>
+				</div>
+				</hr>
+			</div>
+		</div>
+	</section>
+	<!-- ./Footer -->
+  <style>
+  /* Footer */
+@import url('https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css');
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+#lastSentTx {
+
+    font-size: 12px;
+
+}
+#shareList {
+  font-size: 12px;
+}
+#container2 {
+  font-size: 12px;
+}
+#myInput {
+
+    border-top: 0px;
+    border-radius: 0px;
+
+}
+#myInput2 {
+
+    border-top: 0px;
+    border-radius: 0px;
+
+}
+.table-dark th {
+
+    font-size: 12px;
+
+}
+#nextPay {
+  font-weight: bold;
+}
+.table-dark td {
+  font-size: 12;
+}
+.highcharts-credits {
+
+    display: none;
+
+}
+.navbar-expand-lg .navbar-nav {
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    float: right;
+
+}
+
+body {
+
+    padding-right: 0px !important;
+
+}
+.avatar {
+
+    width: 40px !important;
+    height: 40px !important;
+
+}
+.blockquote.text-left {
+
+    border: 4px solid black;
+
+}
+.list-group-item {
+  border-radius: 0px !important;
+}
+  </style>
+
+<!-- Modal Things -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card">
+          <div class="card-header">
+            <b> Server Information </b>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped" style="font-size: 12px;">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pool Version</th>
+                <td>Burstneon Eros v. 1.0.3 </td>
+              </tr>
+              <tr>
+                <th scope="row">Wallet Version</th>
+                <td><%= wallet %> </td>
+              </tr>
+
+              <tr>
+                <th scope="row">Uniform Resource Locator</th>
+                <td><%= url %>:<%= port %></td>
+              </tr>
+              <tr>
+                <th scope="row">Reward Distribution</th>
+                <td><%= ((1-distribution)*100).toFixed(2) %> % - <%= (distribution*100).toFixed(2) %> %  </td>
+              </tr>
+              <tr>
+                <th scope="row">Pool Fee</th>
+                <td><%= fee %> %</td>
+              </tr>
+              <tr>
+                <th scope="row">Distribution Threshold</th>
+                <td><%= payoutDelay %></td>
+              </tr>
+              <tr>
+                <th scope="row">Transaction Fee</th>
+                <td>paid by the pool</td>
+              </tr>
+              <tr>
+                <th scope="row">Minimum Payout</th>
+                <td><%= threshold %> Blocks </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="card-header">
+            <b> How it works </b>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped" style="font-size: 12px;">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+              <ul>
+                  <li><b>Payment is instant when pool has positive balance</b></li>
+                  <li><b>Share value reduction is 50% per block</b></li>
+                      <p> if pool on current round does not find a block, miners shares are keep (up to 360 blocks),
+                          but their value is reduced by 50% everytime we dont found a block.
+                          when pool has positive balance, all share are summed up to block# where payment will be made,
+                          and burst payment are made proportional to total share miners own up to this time
+                      </p>
+                  <li><b>Deadline limit</b></li>
+                      <p> deadline value from miner is converted into share value using this equation<br/>
+                          share = 1000 / ( NetDiff * Deadline + 1 ) <sup>0.75</sup><br/>
+                          where NetDiff (Network Difficulty) is calculated by <br> <code> 18325193796 / BaseTarget </code><br/><br/>
+                          <b>note</b> : to prevent user spamming low share, there is a request limit.
+                      </p>
+              </ul>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card">
+          <div class="card-header">
+            <b id="account"> </b>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped" style="font-size: 12px;">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Status</th>
+                <td id="status"></td>
+              </tr>
+              <tr>
+                <th scope="row">Best Deadline</th>
+                <td id="bestDeadline"> </td>
+              </tr>
+
+              <tr>
+                <th scope="row">Capacity</th>
+                <td id="capacity"></td>
+              </tr>
+              <tr>
+                <th scope="row">Miner Version:</th>
+                <td id="version"></td>
+              </tr>
+              <tr>
+                <th scope="row">Submitted Deadlines</th>
+                <td id="submitDeadlines"></td>
+              </tr>
+              <tr>
+                <th scope="row">Balance</th>
+                <td id="balance"></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div id="Networks" style="font-size: 12px;"> </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel" style="font-size: 17px; font-weight: bold;"></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-header">
+        <div class="card-header">
+          <b> Miner Configuration </b>
+        </div>
+        <div  class="table-dark">
+        <img class="avatar" style="width:60px; height: 60px;" src="//Untitled-1.png" alt="..."> <b> <a href="https://github.com/Blagodarenko/miner-burst/releases" style="color: #edce74;" > Blago Miner </a> </b> /miner.conf <br>
+      </div>  <blockquote class="blockquote text-left">
+          {
+          				   "Mode" : "pool",
+          				   "Server" : "<%= url %>",
+          				   "Port": <%= port %>,
+
+          				   "UpdaterAddr" : "<%= url %>",
+          				   "UpdaterPort": "<%= port %>",
+
+          				   "InfoAddr" : "<%= url %>",
+          				   "InfoPort": "<%= port %>",
+
+          				   "EnableProxy": false,
+          				   "ProxyPort": 8126,
+
+          				   "Paths":["A:\\Burst\\plots","B:\\Burst\\plots", "C:\\Burst\\plots", "D:\\Burst\\plots","E:\\Burst\\plots", "P:\\Burst\\plots", "U:\\Burst\\plots"],
+          				   "CacheSize" : 100000,
+          				   "CacheSize2" : 100000,
+
+          				   "Debug": true,
+          				   "UseHDDWakeUp": false,
+
+          				   "TargetDeadline": 63072000,
+
+          				   "SendInterval": 100,
+          				   "UpdateInterval": 950,
+
+          				   "UseLog" : true,
+          				   "ShowWinner" : false,
+          				   "UseBoost" : true,
+
+          				   "WinSizeX": 76,
+          				   "WinSizeY": 60,
+
+          				  "POC2StartBlock": 502000
+          				} </blockquote>   <div  class="table-dark">
+                  <img class="avatar" style="width:40px; height: 40px;" src="//12.png" alt="..."> <b> <a href="https://github.com/Creepsky/creepMiner" style="color: #edce74;" > Creep Miner </a> </b> /miner.conf <br>
+                </div> <blockquote class="blockquote text-left">
+                    {
+                                                        "logging" : {
+                                                            "config" : "information",
+                                                            "general" : "information",
+                                                            "logfile" : true,
+                                                            "miner" : "information",
+                                                            "nonceSubmitter" : "information",
+                                                            "output" : {
+                                                                "dirDone" : true,
+                                                                "lastWinner" : true,
+                                                                "nonceConfirmed" : true,
+                                                                "nonceFound" : true,
+                                                                "nonceFoundTooHigh" : false,
+                                                                "nonceSent" : true,
+                                                                "plotDone" : false
+                                                            },
+                                                            "outputType" : "terminal",
+                                                            "path" : "/home/user/.creepMiner/1.8.3/logs/",
+                                                            "plotReader" : "information",
+                                                            "plotVerifier" : "information",
+                                                            "progressBar" : {
+                                                                "fancy" : true,
+                                                                "steady" : true
+                                                            },
+                                                            "server" : "fatal",
+                                                            "session" : "error",
+                                                            "socket" : "off",
+                                                            "useColors" : true,
+                                                            "wallet" : "fatal"
+                                                        },
+                                                        "mining" : {
+                                                            "benchmark" : {
+                                                                "active" : false,
+                                                                "interval" : 60
+                                                            },
+                                                            "bufferChunkCount" : 16,
+                                                            "cpuInstructionSet" : "AUTO",
+                                                            "databasePath" : "/home/user/.creepMiner/1.8.3/data.db",
+                                                            "getMiningInfoInterval" : 3,
+                                                            "gpuDevice" : 0,
+                                                            "gpuPlatform" : 0,
+                                                            "intensity" : 0,
+                                                            "maxBufferSizeMB" : 0,
+                                                            "maxHistoricalBlocks" : 0,
+                                                            "maxPlotReaders" : 0,
+                                                            "passphrase" : {
+                                                                "algorithm" : "aes-256-cbc",
+                                                                "decrypted" : "",
+                                                                "deleteKey" : true,
+                                                                "encrypted" : "",
+                                                                "iterations" : 1000,
+                                                                "key" : "",
+                                                                "salt" : ""
+                                                            },
+                                                            "plots" : [
+                                                                "/media/user/152581250-183102434/burst",
+                                                                "/media/user/213623723-244144907/burst",
+                                                                "/media/user/Seagate Expansion Drive/burst",
+                                                                "/media/user/0-30521184/burst",
+                                                                "/media/user/30521184-61017696/burst",
+                                                                "/media/user/91538881-122060065/burst"
+                                                            ],
+                                                            "poc2StartBlock" : 502000,
+                                                            "processorType" : "CPU",
+                                                            "rescanEveryBlock" : false,
+                                                            "submissionMaxRetry" : 10,
+                                                            "submitProbability" : 0.999,
+                                                            "targetDeadline" : "00:00:00",
+                                                            "timeout" : 45,
+                                                            "urls" : {
+                                                                "miningInfo" : "<%= url %>:<%= port %>",
+                                                                "submission" : "<%= url %>:<%= port %>",
+                                                                "wallet" : "https://wallet.burst.cryptoguru.org:8125/"
+                                                            },
+                                                            "useInsecurePlotfiles" : false,
+                                                            "wakeUpTime" : 0,
+                                                            "walletRequestRetryWaitTime" : 3,
+                                                            "walletRequestTries" : 3
+                                                        },
+                                                        "webserver" : {
+                                                            "activeConnections" : 32,
+                                                            "calculateEveryDeadline" : false,
+                                                            "certificate" : {
+                                                                "pass" : "",
+                                                                "path" : ""
+                                                            },
+                                                            "connectionQueue" : 64,
+                                                            "credentials" : {
+                                                                "pass" : "",
+                                                                "user" : ""
+                                                            },
+                                                            "cumulatePlotsizes" : true,
+                                                            "forwardMinerNames" : true,
+                                                            "forwardUrls" : [
+
+                                                            ],
+                                                            "start" : true,
+                                                            "url" : "http://0.0.0.0:8124"
+                                                        }
+                                                    }
+                  </blockquote>
+        </code>
+        <div  class="table-dark">
+        <img class="avatar" style="width:40px; height: 40px;" src="/12.png" alt="..."> <b> <a href="https://github.com/PoC-Consortium/scavenger" style="color: #edce74;" > Scavenger </a> </b> /config.yaml <br>
+        </div> <blockquote class="blockquote text-left">
+
+                    account_id_to_secret_phrase:
+                    <code>"your numeric id": 'your passphrase' </code>
+
+
+                     plot_dirs:
+                     - "E:\\Plotsv2"
+                     - "D:\\BurstPlot"
+                     - "F:\\CompletedPlots"
+                     - "F:\\Plots"
+
+
+                    # url: 'http://pool.dev.burst-test.net:8124'   # testnet pool
+                    url: "<%= url %>:<%= port %>"   # testnet wallet
+                    # url: 'http://dummypool.megash.it'            # dummypool with constant scoop number for benchmarking
+
+                    hdd_reader_thread_count: 0            # default 0 (=number of disks)
+                    hdd_use_direct_io: true               # default true
+                    hdd_wakeup_after: 240                 # default 240s
+
+                    cpu_worker_thread_count: 4            # default 4 (0=GPU only)
+                    cpu_nonces_per_cache: 65536           # default 65536
+                    cpu_thread_pinning: false             # default false
+
+                    gpu_platform: 0                       # default 0
+                    gpu_device: 0                         # default 0
+                    gpu_worker_thread_count: 0            # default 0 (=CPU only)
+                    gpu_nonces_per_cache: 262144          # default 262144
+                    gpu_mem_mapping: false                # default false
+
+                    target_deadline: 4294967295           # default u32::MAX
+                    account_id_to_target_deadline:        # target dls for multi-id (optional)
+                     10282355196851764065: 600000
+                     1796535821016683299: 55555555
+
+                    get_mining_info_interval: 3000        # default 3000ms
+                    timeout: 5000                         # default 5000ms
+                    send_proxy_details: true              # default false
+
+                    console_log_level: 'info'             # default Info, options (off, error, warn, info, debug, trace)
+                    logfile_log_level: 'warn'             # default Warn, options (off, error, warn, info, debug, trace)
+                    logfile_max_count: 10                 # maximum number of log files to keep
+                    logfile_max_size : 20                 # maximum size per logfile in MiB
+
+                    show_progress: true                   # default true
+                    show_drive_stats: false               # default false
+                    benchmark_only: 'disabled'            # default disabled, options (disabled, I/O, XPU)
+
+                    # Low noise log patterns
+                    console_log_pattern: "{({d(%H:%M:%S)} [{l}]):16.16} {m}{n}"
+                    logfile_log_pattern: "{({d(%Y-%m-%d %H:%M:%S)} [{l}]):26.26} {m}{n}"
+
+        </blockquote>
+        </code>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

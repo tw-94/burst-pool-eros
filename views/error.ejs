@@ -1,0 +1,640 @@
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script src="/jquery.js"  type="text/javascript"></script>
+  <script src="/mustache.js"  type="text/javascript"></script>
+  <script src="/moment.js"  type="text/javascript"></script>
+  <script src="/piechart.js"  type="text/javascript"></script>
+  <script src="/chart.js"  type="text/javascript"></script>
+  <script src="/nxt_address_ex.js"  type="text/javascript"></script>
+  <script src="/index.js"  type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script language="javascript" type="text/javascript" src="../qr/qrcode.js"></script>
+<link rel="stylesheet" type="text/css" href="/json.css" />
+
+  <title>Burstcoin Pool</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body onload="getBlocks()">
+
+  <div class="d-flex toggled" id="wrapper" >
+
+    <!-- Sidebar -->
+
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <a href="https://burstneon.com"><img alt="" src="logox.png" height="52px" style="padding-right: 15px;"> </a>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose Pool
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a style="border-left: 5px solid #0093ff;"class="dropdown-item" href="http://burstneon.com/20-80"><b> Pool Version C20-H80 </b></a>
+            <a style="border-left: 5px solid grey" class="dropdown-item" href="http://burstneon.com/50-50"><b> Pool Version C50-H50 </b></a>
+            <a  style="border-left: 5px solid black" class="dropdown-item" href="http://burstneon.com/0-100"><b> Pool Version C100-H0 </b></a>
+          </div>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            			<li class="nav-item" ><a href="https://discord.gg/cUJDhqq"><i class="fa fa-discord" style="font-size: 32px; color: #505050; "></i></a></li>
+            <li class="nav-item">
+              <a class="nav-link" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal3"><b>Pool Information </b></a>
+            </li>
+
+
+            <li class="nav-item">
+                              <a id="nextPay" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal"><b>  </b></a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container" style="container: 'body'">
+  <div class="row">
+      <div class="col-md-12">
+        <div id='oopss'>
+  <div id='error-text'>
+    <span>105</span>
+    <p>Account not exist</p>
+    <p class='hmpg'><a href='javascript:history.back()' class="back">Back</a></p>
+  </div>
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+body {
+  font-family: 'Open Sans';
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:visited {
+  color: #fff;
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:visited:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+* {
+  paading: 0;
+  margin: 0;
+}
+
+#oopss {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 1.5em;
+  left: 0px;
+  background: #494e62 !important;
+}
+#page-content-wrapper {
+
+    min-width: 0;
+    width: 100%;
+    background: black;
+    background: #494e62 !important;
+
+}
+#error-text {
+  top: 30%;
+  position: relative;
+  font-size: 40px;
+  color: #eee;
+}
+
+#error-text a {
+  color: #eee;
+}
+
+#error-text a:hover {
+  color: #fff;
+}
+
+#error-text p {
+  color: #eee;
+  margin: 70px 0 0 0;
+}
+
+#error-text i {
+  margin-left: 10px;
+}
+
+#error-text p.hmpg {
+  margin: 40px 0 0 0;
+}
+
+#error-text span {
+  position: relative;
+  background: #ef4824;
+  color: #fff;
+  font-size: 300%;
+  padding: 0 20px;
+  border-radius: 5px;
+  font-weight: bolder;
+  transition: all .5s;
+  cursor: pointer;
+  margin: 0 0 40px 0;
+}
+
+#error-text span:hover {
+  background: #d7401f;
+  color: #fff;
+  -webkit-animation: jelly .5s;
+  -moz-animation: jelly .5s;
+  -ms-animation: jelly .5s;
+  -o-animation: jelly .5s;
+  animation: jelly .5s;
+}
+
+#error-text span:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: #ef4824;
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+@-webkit-keyframes jelly {
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(.9, 1.1);
+    transform: scale(.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, .9);
+    transform: scale(1.1, .9);
+  }
+  75% {
+    -webkit-transform: scale(.95, 1.05);
+    transform: scale(.95, 1.05);
+  }
+}
+
+@keyframes jelly {
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(.9, 1.1);
+    transform: scale(.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, .9);
+    transform: scale(1.1, .9);
+  }
+  75% {
+    -webkit-transform: scale(.95, 1.05);
+    transform: scale(.95, 1.05);
+  }
+}
+/* CSS Error Page Responsive */
+
+@media only screen and (max-width:640px) {
+  #error-text span {
+    font-size: 200%;
+  }
+  #error-text a:hover {
+    color: #fff;
+  }
+}
+
+.back:active {
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  transform: scale(0.95);
+  background: #f53b3b;
+  color: #fff;
+}
+
+.back:hover {
+  background: #4c4c4c;
+  color: #fff;
+}
+
+.back {
+  text-decoration: none;
+  background: #5b5a5a;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border-radius: 3px;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  transition: all 0.5s ease-out;
+}
+  </style>
+</div>
+      </div>
+  </div>
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="css/vendor/jquery/jquery.min.js"></script>
+  <script src="css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+    $("#wrapper").toggleClass("toggled");
+  </script>
+
+</body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Footer -->
+	<section id="footer" style=" background: #494e62 !important; color: black !important;">
+		<div class="container">
+			<div class="row text-center text-xs-center text-sm-left text-md-left">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Network</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://explore.burst.cryptoguru.org/"><i class="fa fa-angle-double-right"></i>Block Explorer</a></li>
+						<li><a href="https://www.burst-coin.org/"><i class="fa fa-angle-double-right"></i>Burst-coin.org</a></li>
+						<li><a href="https://www.burst-coin.org/wp-content/uploads/2017/07/The-Burst-Dymaxion-1.00.pdf"><i class="fa fa-angle-double-right"></i>Whitepaper</a></li>
+						<li><a href="https://addons.mozilla.org/de/firefox/"><i class="fa fa-angle-double-right"></i>Firefox Extension</a></li>
+						<li><a href="https://github.com/burst-apps-team/Qbundle/releases"><i class="fa fa-angle-double-right"></i>Download Wallet</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Forum</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://www.reddit.com/r/burstcoin/"><i class="fa fa-angle-double-right"></i>Reddit.com</a></li>
+						<li><a href="https://www.burstforum.net/"><i class="fa fa-angle-double-right"></i>Burstforum.com</a></li>
+						<li><a href="https://forums.getburst.net/"><i class="fa fa-angle-double-right"></i>GetBurst.com</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Burst Communication</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://discordapp.com/invite/RPhpjVv"><i class="fa fa-angle-double-right"></i>Discord</a></li>
+						<li><a href="https://t.me/burstcoin"><i class="fa fa-angle-double-right"></i>Telegram</a></li>
+						<li><a href="https://bitcointalk.org/index.php?topic=1541310"><i class="fa fa-angle-double-right"></i>Bitcointalk</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="https://discord.gg/cUJDhqq"><i class="fa fa-discord"></i></a></li>
+
+					</ul>
+				</div>
+				</hr>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+				 <p>	The  <u><a href="https://github.com/BurstNeon">Pool Software</a></u> is written by Burstneon and will be tested for public access </p>
+					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://github.com/BurstNeon" target="_blank">Burstneon</a></p>
+				</div>
+				</hr>
+			</div>
+		</div>
+	</section>
+	<!-- ./Footer -->
+  <style>
+  /* Footer */
+@import url('https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css');
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+#lastSentTx {
+
+    font-size: 12px;
+
+}
+#shareList {
+  font-size: 12px;
+}
+#container2 {
+  font-size: 12px;
+}
+.table-dark th {
+
+    font-size: 12px;
+
+}
+#nextPay {
+  font-weight: bold;
+}
+.table-dark td {
+  font-size: 12;
+}
+.highcharts-credits {
+
+    display: none;
+
+}
+.table {
+  font-size: 12px;
+}
+#bookmarkme {
+
+    color: black;
+    font-weight: bold;
+    font-size: 14px !important;
+    margin-bottom: 6px;
+
+}
+.form-control:disabled, .form-control[readonly] {
+
+    background-color: #73587800 !important;
+    opacity: 1;
+
+}
+.navbar-expand-lg .navbar-nav {
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    float: right;
+
+}
+
+body {
+
+    padding-right: 0px !important;
+
+}
+.avatar {
+
+    width: 40px !important;
+    height: 40px !important;
+
+}
+.blockquote.text-left {
+
+    border: 4px solid black;
+
+}
+.list-group-item {
+  border-radius: 0px !important;
+}
+
+  </style>
+
+<!-- Modal Things -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card">
+          <div class="card-header">
+            <b> Server Information </b>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped" style="font-size: 12px;">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pool Version</th>
+                <td>Burstneon v. 1.0.3 </td>
+              </tr>
+              <tr>
+                <th scope="row">Wallet Version</th>
+                <td><%= wallet %> </td>
+              </tr>
+
+              <tr>
+                <th scope="row">Uniform Resource Locator</th>
+                <td>burstneon.com:8080</td>
+              </tr>
+              <tr>
+                <th scope="row">Reward Distribution</th>
+                <td>20% Current Shares - 80% Historic Shares </td>
+              </tr>
+              <tr>
+                <th scope="row">Pool Fee</th>
+                <td>0.5 %</td>
+              </tr>
+              <tr>
+                <th scope="row">Distribution Threshold</th>
+                <td>5 Blocks</td>
+              </tr>
+              <tr>
+                <th scope="row">Transaction Fee</th>
+                <td>paid by the pool</td>
+              </tr>
+              <tr>
+                <th scope="row">Minimum Payout</th>
+                <td>20 Burst</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="card-header">
+            <b> How it works </b>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped" style="font-size: 12px;">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+              <ul>
+                  <li><b>Payment is instant when pool has positive balance</b></li>
+                  <li><b>Share value reduction is 50% per block</b></li>
+                      <p> if pool on current round does not find a block, miners shares are keep (up to 360 blocks),
+                          but their value is reduced by 50% everytime we dont found a block.
+                          when pool has positive balance, all share are summed up to block# where payment will be made,
+                          and burst payment are made proportional to total share miners own up to this time
+                      </p>
+                  <li><b>Deadline limit</b></li>
+                      <p> deadline value from miner is converted into share value using this equation<br/>
+                          share = 1000 / ( NetDiff * Deadline + 1 ) <sup>0.75</sup><br/>
+                          where NetDiff (Network Difficulty) is calculated by <br> <code> 18325193796 / BaseTarget </code><br/><br/>
+                          <b>note</b> : to prevent user spamming low share, there is a request limit.
+                      </p>
+              </ul>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div><div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div id="Networks" style="font-size: 12px;"> </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel" style="font-size: 17px; font-weight: bold;"></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

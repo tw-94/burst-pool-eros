@@ -1,0 +1,10 @@
+<tr  class="AllRoundItem" id="AllRoundItem-{{accountId}}">
+    <!-- <td> <div class="AllRoundItem divRow" id="AllRoundItem-{{accountId}}">{{accountId}}</div></td> -->
+    <td> <div class="AllRoundItemCol divCell addr"><a href="https://burstneon.com/account?id={{accountId}}">{{accountRS}}</a></div></td>
+            <td> <div class="AllRoundItem divRow" id="AllRoundItem-Name{{accountId}}">{{name}}</div></td>
+    <td> <div class="AllRoundItemCol divCell" id="AllRoundItem-Deadline-{{accountId}}">{{deadlineStr}}</div></td>
+    <td> <div class="AllRoundItemCol divCell" id="AllRoundItem-Share-{{accountId}}">{{share}}</div></td>
+    <td> <div class="AllRoundItemCol divCell" id="AllRoundItem-Capacity-{{accountId}}">{{{capacity}}}</div></td>
+      <td> <div class="AllRoundItemCol divCell" id="AllRoundItem-Balance-{{accountId}}"> <span class="badge badge-pill badge-success"> {{{balance}}} </span></div></td>
+            <td> <div  class="AllRoundItemCol divCell" id="AllRoundItem-Miner-{{accountId}}">{{miner}}</div></td>
+</tr>

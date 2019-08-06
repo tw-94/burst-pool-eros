@@ -1,0 +1,8 @@
+
+    <tr>
+    <td id="RecentPaymentItem-{{txid}}">{{accountId}}</td>
+    <td ><a href="https://blocks.fastpool.info/address/{{accountId}}">{{accountRS}}</a></td>
+    <td  id="RecentPaymentItem-Amount-{{txid}}">{{amountStr}}</td>
+    <td  id="RecentPaymentItem-Time-{{txid}}"><a href="http://burst.cryptoport.io/tx/{{txid}}">{{sendTimeStr}}</a></td>
+    
+    </tr>
