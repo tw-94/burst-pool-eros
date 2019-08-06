@@ -18,6 +18,10 @@ npm install or npm install 'module-name'
 After that run
 
 ```
-frontend.bat and backend.bat
+frontend.bat
+backend.bat
+historicBlocks.bat
+getNames.bat
+getHistoricBlocks.bat
 ```
 
