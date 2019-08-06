@@ -1,3 +1,5 @@
+# ![EROS](https://i.ibb.co/VT2y6JW/31c66ab5-b703-4984-b5cd-82548be29c9c-200x200.png)
+
 ### Eros Pool-Software
 The eros software has roots in the backend of uraymeiviar and SOELexicon. The frontend has been rewritten and has a new engine implemented. Many bugs in the backend were fixed and additional features implemented. If you find the software useful, it would be nice to make a donation.
 
