@@ -572,7 +572,7 @@ function writeToCsv() {
    for (var key in pendingPaymentList) {
      var nxt = new NxtAddress();
      if (pendingPaymentList.hasOwnProperty(key)) {
-       if(decimalToSatoshi(pendingPaymentList[key]) >= 2000000000) {
+       if(decimalToSatoshi(pendingPaymentList[key]) >= poolConfig.clearPending * 100000000) {
          canWrite = true;
 
 			sendPayment2(key, decimalToSatoshi(pendingPaymentList[key]));
