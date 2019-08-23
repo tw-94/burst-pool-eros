@@ -68,6 +68,8 @@ module.exports = {
     //Dont change this values
     minimumPayout : 14000.0,
     clearingMinPayout : 20000.0,
+    //Clear Payout after certain block
+    clearPending: 20,	
     //End of not change area
     lastSessionFile : 'last-session.json',
     //Distribution Current Shares: 1-cumulativeFundReduction | Historic Shares: cumulativeFundReduction
