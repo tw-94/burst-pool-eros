@@ -69,7 +69,7 @@ module.exports = {
     minimumPayout : 14000.0,
     clearingMinPayout : 20000.0,
     //Clear Payout after certain block
-    clearPending: 20,	
+    clearPending: 20,
     //End of not change area
     lastSessionFile : 'last-session.json',
     //Distribution Current Shares: 1-cumulativeFundReduction | Historic Shares: cumulativeFundReduction
@@ -105,6 +105,12 @@ module.exports = {
     maxCache: 5000,
     //max sockets
     maxSockets: 1000,
+    //Used upstream for multiple coins
+    upstreamUsed: false,
+    //Upstream Endpoint
+    upstreamPort: 3001,
+    //Upstream Port
+    upstreamPortStart: 3000,
     //Whitelist Ips
     whiteList: [
         {
