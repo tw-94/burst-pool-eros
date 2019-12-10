@@ -8,6 +8,7 @@ let ejs = require('ejs');
 var curl =  require('curl');
 var request = require('request');
 var config = require('./burst-pool-config');
+const upstreamProxy = require('upstream-proxy');
 
 init();
 //Set Engine
@@ -454,4 +455,16 @@ app.get('/', function(req, res) {
         //Listen Port
         app.listen(config.FrontendHttpPort);
         console.log("Frontend listing on " + config.FrontendHttpPort);
+        if(config.upstreamUsed) {
+        let myConfig = [
+        {
+            name: 'Nxt',
+            hostnames: [ 'localhost' ],
+            endpoint: { host: '127.0.0.1', port: config.upstreamPort }
+        }
+        ];
+        let proxy = new upstreamProxy(myConfig);
+        proxy.listen(config.upstreamPortStart).start();
+        console.log("Upstream listing on " + config.upstreamPortStart + " to Endpoint " + config.upstreamPort + " " + proxy.getStatus());
+        }
       }
